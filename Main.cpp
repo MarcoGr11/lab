@@ -10,7 +10,7 @@ int main() {
     // другий екземпляр 
     Student student2("Jane Doe", 19, "S12346");
 
-    // створ екземпляру студент групи A
+    // створ екземпляру студентгрупи A
     StudentGroup group1("Group A");
     // додаван студ1 до групи група1
     group1.addStudent(student1);

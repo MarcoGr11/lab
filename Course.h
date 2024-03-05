@@ -11,7 +11,7 @@ private:
     int credits; // кредити
 
 public:
-    Course(); // конструктор за замовчуванням
+    Course(); // конструктор 
     Course(string courseName, string courseCode, int credits = 3); // перевантажений конструктор
     ~Course(); // деструктор
    

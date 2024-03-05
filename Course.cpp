@@ -1,9 +1,9 @@
 #include "Course.h" 
 
-// конструктор який ініціалізує члени класу зі значеннями 
-Course::Course() : courseName("Unknown"), courseCode("000"), credits(3) {}
+// конструктор делагування
+Course::Course() : Course("Unknown","000",3) {}
 
-// перевантажений конструктор з конкретними значеннями
+// перевантажений конструктор 
 Course::Course(string courseName, string courseCode, int credits) : courseName(courseName), courseCode(courseCode), credits(credits) {}
 
 // деструктор

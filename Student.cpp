@@ -1,12 +1,13 @@
 #include "Student.h"
 
-// конструктор за замовчуванням ініціаліз
-Student::Student() : name("Unknown"), age(0), id("0000") {}
+// делегування конструктора 
+Student::Student() : Student("Unknown", 0, "0000") {}
 
 // перевантажений конструктор для ініціаліз
 Student::Student(string name, int age, string id) : name(name), age(age), id(id) {}
 
 Student::~Student() {} // деструктор
+
 
 // методи для встановлення значень полів
 void Student::setName(string name) {

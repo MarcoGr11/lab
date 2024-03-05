@@ -22,3 +22,4 @@ void StudentGroup::setGroupName(string groupName) {
 
 string StudentGroup::getGroupName() const {
     return groupName; // повернення  назви групи
+};
