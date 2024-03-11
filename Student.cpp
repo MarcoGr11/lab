@@ -1,15 +1,59 @@
 #include "Student.h"
+// ініціалізація статичної змінної
 
-// делегування конструктора 
-Student::Student() : Student("Unknown", 0, "0000") {}
+int Student::studentCount = 0; 
 
-// перевантажений конструктор для ініціаліз
-Student::Student(string name, int age, string id) : name(name), age(age), id(id) {}
+// конструктор за замовч
+Student::Student() : Student("Unknown", 0, "0000") {
+    studentCount++;
+}
 
-Student::~Student() {} // деструктор
+// параметризований конструктор
+Student::Student(string name, int age, string id) : name(name), age(age), id(id) {
+    studentCount++;
+}
 
+// конструктор копіювання
+Student::Student(const Student& other) : name(other.name), age(other.age), id(other.id) {
+    studentCount++;
+}
 
-// методи для встановлення значень полів
+// конструктор переміщ
+Student::Student(Student&& other) noexcept : name(move(other.name)), age(other.age), id(move(other.id)) {
+    studentCount++;
+}
+
+// деструктор
+Student::~Student() {
+    studentCount--;
+}
+
+// оператор присвоєння копіювання
+Student& Student::operator=(const Student& other) {
+    if (this != &other) {
+        name = other.name;
+        age = other.age;
+        id = other.id;
+    }
+    return *this;
+}
+
+// оператор присвоєння переміщ
+Student& Student::operator=(Student&& other) noexcept {
+    if (this != &other) {
+        name = move(other.name);
+        age = other.age;
+        id = move(other.id);
+    }
+    return *this;
+}
+
+// унарний оператор 
+Student& Student::operator++() {
+    ++age;
+    return *this;
+}
+// гетери та сетери
 void Student::setName(string name) {
     this->name = name;
 }
@@ -33,3 +77,26 @@ void Student::setId(string id) {
 string Student::getId() const {
     return id;
 }
+
+// статичний метод для отрим к-ті студент
+int Student::getStudentCount() {
+    return studentCount;
+}
+
+// оператор вивед
+ostream& operator<<(ostream& os, const Student& student) {
+    os << "Name: " << student.name << ", Age: " << student.age << ", ID: " << student.id;
+    return os;
+}
+
+// оператор введ
+istream& operator>>(istream& is, Student& student) {
+    cout << "Enter name: ";
+    is >> student.name;
+    cout << "Enter age: ";
+    is >> student.age;
+    cout << "Enter ID: ";
+    is >> student.id;
+    return is;
+}
+

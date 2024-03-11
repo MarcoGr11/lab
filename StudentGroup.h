@@ -15,7 +15,7 @@ public:
     StudentGroup(string groupName); // перевантажений конструктор
     ~StudentGroup(); // деструктор
 
-    void addStudent(const Student& student); // додати студента до групи
+    void addStudent(const Student& student); // додає студента до групи
     void setGroupName(string groupName);
     string getGroupName() const;
 };
