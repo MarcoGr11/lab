@@ -8,6 +8,7 @@ protected:
     string name_;  // Змінні визначено як protected для доступу в похідних класах
     int age_;
 
+
 public:
     Person(const string& name, int age) : name_(name), age_(age) {}
     virtual ~Person() {}

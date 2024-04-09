@@ -1,25 +1,25 @@
 #include "StudentGroup.h"
 
-// конструктор 
-StudentGroup::StudentGroup() : groupName("Unknown") {}
+// Конструктор за замовчуванням ініціалізує groupName порожнім рядком
+StudentGroup::StudentGroup() : groupName("") {}
 
-// перевантажений констр
+// Перевантажений конструктор ініціалізує groupName заданим значенням
 StudentGroup::StudentGroup(string groupName) : groupName(groupName) {}
 
-// деструктор
+// Деструктор - залишаємо порожнім, оскільки вектор students автоматично керує своєю пам'яттю
 StudentGroup::~StudentGroup() {}
 
-// додаєи об'єкт студт до вектора студт в груп
+// Додає студента до вектора студентів
 void StudentGroup::addStudent(const Student& student) {
-    students.push_back(student); // додаєм студт до вектора студт
+    students.push_back(student);
 }
 
-// встановлює назву групи
+// Встановлює назву групи
 void StudentGroup::setGroupName(string groupName) {
-    this->groupName = groupName; // використ this для доступу до змінної екземпляра класу
+    this->groupName = groupName;
 }
 
-
+// Отримує назву групи
 string StudentGroup::getGroupName() const {
-    return groupName; 
-};
+    return groupName;
+}

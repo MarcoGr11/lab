@@ -3,21 +3,21 @@
 
 #include "Student.h"
 #include <vector>
-using namespace std;
+#include <string>
 
 class StudentGroup {
 private:
-    vector<Student> students; // список студентів у групі
-    string groupName; // назва групи
+    std::vector<Student> students; // список студентів у групі
+    std::string groupName; // назва групи
 
 public:
-    StudentGroup(); // конструктор 
-    StudentGroup(string groupName); // перевантажений конструктор
+    StudentGroup(); // конструктор за замовчуванням
+    explicit StudentGroup(std::string groupName); // перевантажений конструктор
     ~StudentGroup(); // деструктор
 
     void addStudent(const Student& student); // додає студента до групи
-    void setGroupName(string groupName);
-    string getGroupName() const;
+    void setGroupName(std::string groupName); // встановлює назву групи
+    std::string getGroupName() const; // повертає назву групи
 };
 
-#endif
+#endif 

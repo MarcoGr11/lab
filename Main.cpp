@@ -32,13 +32,9 @@ int main() {
     // студента-обмінник 
     ExchangeStudent exchangeStudent1("Carlos Hernandez", 21, "S654321", "Spain");
     cout << "Exchange Student: " << exchangeStudent1.getName() << ", ID: " << exchangeStudent1.getId() << ", Country: " << exchangeStudent1.getHomeCountry() << endl;
-
-    
-
     return 0;
 }
 
-}
 
 
 
