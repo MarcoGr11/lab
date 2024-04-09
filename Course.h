@@ -6,24 +6,34 @@ using namespace std;
 
 class Course {
 private:
-    string courseName; // назва курсу
-    string courseCode; // код курсу
-    int credits; // кредити
+    string courseName;  // Назва курсу
+    string courseCode;  // Код курсу
+    int credits;             // Кредити
 
 public:
-    Course(); // конструктор 
-    Course(string courseName, string courseCode, int credits = 3); // перевантажений конструктор
-    ~Course(); // деструктор
-   
-    // mетоди для встанов та отримання значень полів
-    void setCourseName(string courseName);
-    string getCourseName() const;
+    // Конструктор за замовчуванням з ініціалізацією кредитів до значення за замовчуванням
+    Course(const string& courseName = "", const string& courseCode = "", int credits = 0)
+        : courseName(courseName), courseCode(courseCode), credits(credits) {}
 
-    void setCourseCode(string courseCode);
-    string getCourseCode() const;
+    // Деструктор
+    virtual ~Course() {}
 
-    void setCredits(int credits);
-    int getCredits() const;
+    // Методи для доступу та зміни інформації про курс
+    void setCourseName(const string& name) { courseName = name; }
+    string getCourseName() const { return courseName; }
+
+    void setCourseCode(const string& code) { courseCode = code; }
+    string getCourseCode() const { return courseCode; }
+
+    void setCredits(int cr) { credits = cr; }
+    int getCredits() const { return credits; }
+
+    // Метод для виведення інформації про курс
+    void display() const {
+        cout << "Course Name: " << courseName 
+                  << ", Code: " << courseCode 
+                  << ", Credits: " << credits << endl;
+    }
 };
 
-#endif
+#endif 

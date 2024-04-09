@@ -1,5 +1,10 @@
 #include "Course.h" 
 
+// Метод для виведення інформації про курс
+void Course::display() const {
+    cout << "Course Name: " << courseName 
+              << ", Code: " << courseCode 
+              << ", Credits: " << credits << endl;
 // конструктор делагування
 Course::Course() : Course("Unknown","000",3) {}
 

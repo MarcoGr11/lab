@@ -1,11 +1,14 @@
 #include "ExchangeStudent.h"
 
-using namespace std;
+// Параметризований конструктор
+ExchangeStudent::ExchangeStudent(const std::string& name, int age, const std::string& id, const std::string& homeCountry)
+    : Student(name, age, id), homeCountry_(homeCountry) {}
 
-ExchangeStudent::ExchangeStudent(const string& name, int age, const string& university, const string& homeCountry) 
-    : Student(name, age, university), homeCountry_(homeCountry) {}
+// Деструктор
+ExchangeStudent::~ExchangeStudent() {}
 
+// Перевизначений метод display
 void ExchangeStudent::display() const {
-    Student::display();
-    cout << "Home Country: " << homeCountry_ << endl;
+    Student::display();  // Викликає метод display базового класу
+    std::cout << "Home Country: " << homeCountry_ << std::endl;
 }
