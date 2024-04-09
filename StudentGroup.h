@@ -20,4 +20,4 @@ public:
     std::string getGroupName() const; // повертає назву групи
 };
 
-#endif 
+#endif // STUDENTGROUP_H

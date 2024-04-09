@@ -1,17 +1,18 @@
-    #include "Person.h"
-class Person {
-public:
-    Person() : name_(""), age_(0) {} // Конструктор за замовчуванням
-    Person(const string& name, int age) : name_(name), age_(age) {}
-};
+#include "Person.h"
+#include <iostream>
 
-    // Реалізація операторів виводу та вводу
-    ostream &operator<<(ostream &os, const Person &person) {
-        os << "Name: " << person.name_ << ", Age: " << person.age_;
-        return os;
-    }
+// Реалізація оператора виводу
+std::ostream &operator<<(std::ostream &os, const Person &person) {
+    os << "Name: " << person.getName() << ", Age: " << person.getAge();
+    return os;
+}
 
-    istream &operator>>(istream &is, Person &person) {
-        is >> person.name_ >> person.age_;
-        return is;
-    }
+// Реалізація оператора вводу
+std::istream &operator>>(std::istream &is, Person &person) {
+    std::string name;
+    int age;
+    is >> name >> age;
+    person.setName(name);
+    person.setAge(age);
+    return is;
+}

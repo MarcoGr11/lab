@@ -1,18 +1,17 @@
 #include "Teacher.h"
+#include <iostream> // Додайте для доступу до std::cout
 
-using namespace std;
-
-// Конструктор
-Teacher::Teacher(const string& name, int age, const string& subject) 
+// Використовуйте std::string у визначенні параметрів
+Teacher::Teacher(const std::string& name, int age, const std::string& subject) 
     : Person(name, age), subject_(subject) {}
 
-// Метод для відображення інформації про вчителя
+// Використовуйте std::cout для виводу інформації
 void Teacher::display() const {
     Person::display();
-    cout << "Subject: " << subject_ << endl;
+    std::cout << "Subject: " << subject_ << std::endl;
 }
 
-// Деструктор
+// Порожній деструктор
 Teacher::~Teacher() {
     // Використання деструктора для демонстрації
 }

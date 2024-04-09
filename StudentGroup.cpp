@@ -4,7 +4,7 @@
 StudentGroup::StudentGroup() : groupName("") {}
 
 // Перевантажений конструктор ініціалізує groupName заданим значенням
-StudentGroup::StudentGroup(string groupName) : groupName(groupName) {}
+StudentGroup::StudentGroup(std::string groupName) : groupName(groupName) {}
 
 // Деструктор - залишаємо порожнім, оскільки вектор students автоматично керує своєю пам'яттю
 StudentGroup::~StudentGroup() {}
@@ -15,11 +15,11 @@ void StudentGroup::addStudent(const Student& student) {
 }
 
 // Встановлює назву групи
-void StudentGroup::setGroupName(string groupName) {
+void StudentGroup::setGroupName(std::string groupName) {
     this->groupName = groupName;
 }
 
 // Отримує назву групи
-string StudentGroup::getGroupName() const {
+std::string StudentGroup::getGroupName() const {
     return groupName;
 }
