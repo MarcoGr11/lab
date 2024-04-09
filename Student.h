@@ -1,4 +1,3 @@
-#pragma once
 #include "Person.h"
 #include <iostream>
 #include <string>
@@ -11,7 +10,7 @@ private:
 
 public:
     // Конструктор за замовчуванням
-    Student() : id_("") {}
+    Student() : id_(" ") {}
 
     // Параметризований конструктор
     Student(const string& name, int age, const string& id) : Person(name, age), id_(id) {}
