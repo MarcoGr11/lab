@@ -3,12 +3,12 @@
 
 Course::Course() : courseName("Unknown"), courseCode("000"), credits(3) {}
 
-Course::Course(std::string name, std::string code, int cr)
+Course::Course(const std::string& name, const std::string& code, int cr)
     : courseName(name), courseCode(code), credits(cr) {}
 
 Course::~Course() {}
 
-void Course::setCourseName(std::string name) {
+void Course::setCourseName(const std::string& name) {
     courseName = name;
 }
 
@@ -16,7 +16,7 @@ std::string Course::getCourseName() const {
     return courseName;
 }
 
-void Course::setCourseCode(std::string code) {
+void Course::setCourseCode(const std::string& code) {
     courseCode = code;
 }
 
@@ -33,7 +33,7 @@ int Course::getCredits() const {
 }
 
 void Course::display() const {
-    std::cout << "Course Name: " << courseName
-              << ", Code: " << courseCode
+    std::cout << "Course Name: " << courseName 
+              << ", Code: " << courseCode 
               << ", Credits: " << credits << std::endl;
 }

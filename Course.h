@@ -1,36 +1,28 @@
-#ifndef COURSE_H
-#define COURSE_H
+#ifndef Course_h
+#define Course_h
 
 #include <string>
 
 class Course {
 private:
-    std::string courseName;  // Назва курсу
-    std::string courseCode;  // Код курсу
-    int credits;             // Кредити
+    std::string courseName;
+    std::string courseCode;
+    int credits;
 
 public:
-    // Конструктор за замовчуванням
-    Course() : courseName("Unknown"), courseCode("000"), credits(0) {}
+    Course();
+    Course(const std::string& courseName, const std::string& courseCode, int credits);
+    virtual ~Course();
 
-    // Параметризований конструктор
-    Course(const std::string& courseName, const std::string& courseCode, int credits)
-        : courseName(courseName), courseCode(courseCode), credits(credits) {}
+    void setCourseName(const std::string& name);
+    std::string getCourseName() const;
 
-    // Деструктор
-    virtual ~Course() {}
+    void setCourseCode(const std::string& code);
+    std::string getCourseCode() const;
 
-    // Методи для доступу та зміни інформації про курс
-    void setCourseName(const std::string& name) { courseName = name; }
-    std::string getCourseName() const { return courseName; }
+    void setCredits(int cr);
+    int getCredits() const;
 
-    void setCourseCode(const std::string& code) { courseCode = code; }
-    std::string getCourseCode() const { return courseCode; }
-
-    void setCredits(int cr) { credits = cr; }
-    int getCredits() const { return credits; }
-
-    // Метод для виведення інформації про курс
     void display() const;
 };
 
