@@ -1,26 +1,23 @@
-
+#pragma once
 #include <string>
 #include <iostream>
 
 using namespace std;
 
 class Person {
-public:
-    int age ;
-    Person(const string& name, int age);
-    virtual ~Person();
+protected:
+    string name_;  // Змінні визначено як protected для доступу в похідних класах
+    int age_;
 
-    virtual void display() const;
+public:
+    Person(const string& name, int age) : name_(name), age_(age) {}
+    virtual ~Person() {}
+
+    virtual void display() const {
+        cout << "Name: " << name_ << ", Age: " << age_ << endl;
+    }
     
+    // Додаємо оператори виводу та вводу
     friend ostream &operator<<(ostream &os, const Person &person);
     friend istream &operator>>(istream &is, Person &person);
-
-// Усередині класу Person
-public:
-    void setAge(int age) { this->age = age; }
-    int getAge() const { return age; }
-
-private:
-    string name_;
-    int age_;
 };
