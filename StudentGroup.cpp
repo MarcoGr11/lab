@@ -3,20 +3,20 @@
 // конструктор 
 StudentGroup::StudentGroup() : groupName("Unknown") {}
 
-// перевантажений конструктор, дозволяє задати конкретну назву групи
+// перевантажений констр
 StudentGroup::StudentGroup(string groupName) : groupName(groupName) {}
 
 // деструктор
 StudentGroup::~StudentGroup() {}
 
-// додає об'єкт студента до вектора студентів у групі
+// додаєи об'єкт студт до вектора студт в груп
 void StudentGroup::addStudent(const Student& student) {
-    students.push_back(student); // додає студента до вектора студентів
+    students.push_back(student); // додаєм студт до вектора студт
 }
 
 // встановлює назву групи
 void StudentGroup::setGroupName(string groupName) {
-    this->groupName = groupName; // використовує this для доступу до змінної екземпляра класу
+    this->groupName = groupName; // використ this для доступу до змінної екземпляра класу
 }
 
 

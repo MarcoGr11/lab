@@ -22,7 +22,7 @@ public:
     Student& operator++(); // унарний оператор 
     Student& operator=(const Student& other); // оператор присвоєння копіювання
     Student& operator=(Student&& other) noexcept; // оператор присвоєння переміщ
- //mетоди для встанов та отримання значень полів
+    //mетоди для встанов та отримання значень полів
     void setName(string name);
     string getName() const;
 
@@ -32,7 +32,7 @@ public:
     void setId(string id);
     string getId() const;
 
-    static int getStudentCount(); // статичний метод для отримання к-сті студ
+    static int getStudentCount(); // статич метод для отримання к-сті студ
     friend ostream& operator<<(ostream& os, const Student& student); // оператор вивед
     friend istream& operator>>(istream& is, Student& student); // оператор введ
 };

@@ -1,5 +1,4 @@
 #include "Student.h"
-// ініціалізація статичної змінної
 
 int Student::studentCount = 0; 
 
@@ -8,7 +7,7 @@ Student::Student() : Student("Unknown", 0, "0000") {
     studentCount++;
 }
 
-// параметризований конструктор
+// параметризований констркт
 Student::Student(string name, int age, string id) : name(name), age(age), id(id) {
     studentCount++;
 }
@@ -28,7 +27,7 @@ Student::~Student() {
     studentCount--;
 }
 
-// оператор присвоєння копіювання
+// оператор присв копіюв
 Student& Student::operator=(const Student& other) {
     if (this != &other) {
         name = other.name;
@@ -38,7 +37,7 @@ Student& Student::operator=(const Student& other) {
     return *this;
 }
 
-// оператор присвоєння переміщ
+// оператор присв переміщ
 Student& Student::operator=(Student&& other) noexcept {
     if (this != &other) {
         name = move(other.name);
@@ -53,7 +52,7 @@ Student& Student::operator++() {
     ++age;
     return *this;
 }
-// гетери та сетери
+// гет та сет
 void Student::setName(string name) {
     this->name = name;
 }
@@ -78,7 +77,7 @@ string Student::getId() const {
     return id;
 }
 
-// статичний метод для отрим к-ті студент
+// статич метод для отрим к-ті студент
 int Student::getStudentCount() {
     return studentCount;
 }
