@@ -1,75 +1,55 @@
 #include "Student.h"
+#include "Person.h"
+int Student::studentCount = 0; // Ініціалізація статичної змінної
 
-int Student::studentCount = 0; 
-
-// конструктор за замовч
-Student::Student() : Student("Unknown", 0, "0000") {
-    studentCount++;
+Student::Student() : Person("", 0), id("") {
+    ++studentCount;
 }
 
-// параметризований констркт
-Student::Student(string name, int age, string id) : name(name), age(age), id(id) {
-    studentCount++;
+Student::Student(const string &name, int age, const string &id) : Person(name, age), id(id) {
+    ++studentCount;
 }
 
-// конструктор копіювання
-Student::Student(const Student& other) : name(other.name), age(other.age), id(other.id) {
-    studentCount++;
+Student::Student(const Student &other) : Person(other), id(other.id) {
+    ++studentCount;
 }
 
-// конструктор переміщ
-Student::Student(Student&& other) noexcept : name(move(other.name)), age(other.age), id(move(other.id)) {
-    studentCount++;
+Student::Student(Student &&other) noexcept : Person(move(other)), id(move(other.id)) {
+    ++studentCount;
 }
 
-// деструктор
 Student::~Student() {
-    studentCount--;
+    --studentCount;
 }
 
-// оператор присв копіюв
-Student& Student::operator=(const Student& other) {
+Student& Student::operator++() {
+    ++age; // Прямий доступ до protected члена базового класу
+    return *this;
+}
+
+Student &Student::operator=(const Student &other) {
     if (this != &other) {
-        name = other.name;
-        age = other.age;
+        Person::operator=(other);
         id = other.id;
     }
     return *this;
 }
 
-// оператор присв переміщ
-Student& Student::operator=(Student&& other) noexcept {
+// За межами класу Student
+Student& Student::operator++() {
+    setAge(getAge() + 1); // Використовуючи геттер і сеттер з базового класу Person
+    return *this;
+}
+
+Student &Student::operator=(Student &&other) noexcept {
     if (this != &other) {
-        name = move(other.name);
-        age = other.age;
+        Person::operator=(move(other));
         id = move(other.id);
     }
     return *this;
 }
 
-// унарний оператор 
-Student& Student::operator++() {
-    ++age;
-    return *this;
-}
-// гет та сет
-void Student::setName(string name) {
-    this->name = name;
-}
-
-string Student::getName() const {
-    return name;
-}
-
-void Student::setAge(int age) {
-    this->age = age;
-}
-
-int Student::getAge() const {
-    return age;
-}
-
-void Student::setId(string id) {
+void Student::setId(const string &id) {
     this->id = id;
 }
 
@@ -77,25 +57,28 @@ string Student::getId() const {
     return id;
 }
 
-// статич метод для отрим к-ті студент
 int Student::getStudentCount() {
     return studentCount;
 }
 
-// оператор вивед
-ostream& operator<<(ostream& os, const Student& student) {
-    os << "Name: " << student.name << ", Age: " << student.age << ", ID: " << student.id;
+ostream &operator<<(ostream &os, const Student &student) {
+    os << static_cast<const Person&>(student); // Викликаємо оператор виведення базового класу
+    os << "ID: " << student.id << endl;
     return os;
 }
 
-// оператор введ
-istream& operator>>(istream& is, Student& student) {
-    cout << "Enter name: ";
-    is >> student.name;
-    cout << "Enter age: ";
-    is >> student.age;
-    cout << "Enter ID: ";
+istream &operator>>(istream &is, Student &student) {
+    is >> static_cast<Person&>(student); // Викликаємо оператор введення базового класу
     is >> student.id;
     return is;
 }
-
+ostream &operator<<(ostream &os, const Student &student) {
+    os << static_cast<const Person&>(student); // Викликаємо оператор виведення базового класу
+    os << ", ID: " << student.getId() << endl; // Тепер додаємо інформацію про ID
+    return os;
+}
+istream &operator>>(istream &is, Student &student) {
+    is >> static_cast<Person&>(student); // Викликаємо оператор вводу базового класу
+    is >> student.id;
+    return is;
+}

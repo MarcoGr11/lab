@@ -1,40 +1,33 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include <string>
-#include <iostream>
-using namespace std;
+#include "Person.h"
 
-class Student {
-private:
-    string name; // ім'я студ
-    int age; // вік студ
-    string id; //  номер студ
-    static int studentCount; // статична змінна для відстеж к-сті студ
-
+class Student : public Person {
 public:
     Student();
-    Student(string name, int age, string id);
-    Student(const Student& other); // конструктор копіюв
-    Student(Student&& other) noexcept; // конструктор переміщ
+    Student(const string &name, int age, const string &id);
+    Student(const Student &other); // конструктор копіювання
+    Student(Student &&other) noexcept; // конструктор переміщення
     ~Student();
 
-    Student& operator++(); // унарний оператор 
-    Student& operator=(const Student& other); // оператор присвоєння копіювання
-    Student& operator=(Student&& other) noexcept; // оператор присвоєння переміщ
-    //mетоди для встанов та отримання значень полів
-    void setName(string name);
-    string getName() const;
+    Student &operator++(); // унарний оператор
+    Student &operator=(const Student &other); // оператор присвоєння копіювання
+    Student &operator=(Student &&other) noexcept; // оператор присвоєння переміщення
 
-    void setAge(int age);
-    int getAge() const;
-
-    void setId(string id);
+    void setId(const string &id);
     string getId() const;
+// Усередині класу Student
+    Student& operator++(); // Префіксна версія інкременту
+    // Додати Student& operator++(int); для постфіксної версії, якщо потрібно
 
-    static int getStudentCount(); // статич метод для отримання к-сті студ
-    friend ostream& operator<<(ostream& os, const Student& student); // оператор вивед
-    friend istream& operator>>(istream& is, Student& student); // оператор введ
+    static int getStudentCount(); // статичний метод для отримання кількості студентів
+    friend ostream &operator<<(ostream &os, const Student &student); // оператор виведення
+    friend istream &operator>>(istream &is, Student &student); // оператор введення
+
+private:
+    string id; // ідентифікатор студента
+    static int studentCount; // статична змінна для відстеження кількості студентів
 };
 
 #endif
