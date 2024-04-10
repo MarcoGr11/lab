@@ -10,6 +10,11 @@ Student& Student::operator=(const Student& other) {
     return *this;
 }
 
+Student::Student(const Student &other)
+:Person(other.name_,other.age_),id_(other.id_){
+
+}
+
 // Оператор присвоєння переміщення
 Student& Student::operator=(Student&& other) noexcept {
     if (this != &other) {

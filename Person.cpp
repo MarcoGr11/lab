@@ -1,6 +1,10 @@
 #include "Person.h"
 #include <iostream>
 
+
+Person::Person()
+:name_(""),age_(0){}
+
 // Реалізація оператора виводу
 std::ostream &operator<<(std::ostream &os, const Person &person) {
     os << "Name: " << person.getName() << ", Age: " << person.getAge();

@@ -2,7 +2,7 @@
 #include <iostream> // Додайте для доступу до std::cout
 
 // Використовуйте std::string у визначенні параметрів
-Teacher::Teacher(const std::string& name, int age, const std::string& subject) 
+Teacher::Teacher( std::string name, int age,  std::string subject) 
     : Person(name, age), subject_(subject) {}
 
 // Використовуйте std::cout для виводу інформації

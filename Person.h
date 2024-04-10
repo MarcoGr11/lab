@@ -10,8 +10,13 @@ protected:
     int age_;
 
 public:
+
+    Person();
+
     // Параметризований конструктор
-    Person(const std::string& name, int age) : name_(name), age_(age) {}
+    Person( std::string& name, int age) : name_(name), age_(age) {}
+
+    Person(const std::string& name, int age):name_(name),age_(age){}
 
     // Віртуальний деструктор для коректного очищення у випадку наслідування
     virtual ~Person() {}
@@ -23,7 +28,7 @@ public:
 
     // Геттери та сеттери
     std::string getName() const { return name_; }
-    void setName(const std::string &name) { name_ = name; }
+    void setName( std::string &name) { name_ = name; }
 
     int getAge() const { return age_; }
     void setAge(int age) { age_ = age; }

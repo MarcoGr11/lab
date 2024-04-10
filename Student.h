@@ -7,23 +7,24 @@
 class Student : public Person {
 private:
     std::string id_;  // Унікальний ідентифікатор студента
-
 public:
     // Конструктор за замовчуванням
-    Student() : Person("", 0), id_("") {}
+    Student() : Person(), id_("") {}
 
     // Параметризований конструктор
-    Student(const std::string& name, int age, const std::string& id) 
+    Student( std::string name, int age, std::string id) 
         : Person(name, age), id_(id) {}
 
+        Student(const Student& other);
+
     // Віртуальний деструктор
-    virtual ~Student() override {}
+     ~Student() override {}
 
     // Геттер для ID
     std::string getId() const { return id_; }
 
     // Сеттер для ID
-    void setId(const std::string& id) { id_ = id; }
+    void setId( std::string& id) { id_ = id; }
 
     // Метод для виведення інформації про студента
     virtual void display() const override {
@@ -37,5 +38,5 @@ public:
     // Оператор присвоєння переміщення
     Student& operator=(Student&& other) noexcept;
 };
-
+   
 #endif // STUDENT_H
