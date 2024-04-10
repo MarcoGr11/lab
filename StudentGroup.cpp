@@ -8,7 +8,7 @@ StudentGroup::StudentGroup() : groupName("") {
 }
 
 // Перевантажений конструктор
-StudentGroup::StudentGroup(std::string groupName) : groupName(groupName) {
+StudentGroup::StudentGroup(std::string name) : groupName(name) { 
     ++groupCount;
 }
 
@@ -48,8 +48,17 @@ StudentGroup& StudentGroup::operator=(StudentGroup&& other) noexcept {
 }
 
 // Додає студента до вектора студентів
-void StudentGroup::addStudent(const Student& student) {
+bool StudentGroup::addStudent(const Student& student) {
+    // Перевірка на унікальність імені студента у групі
+    for (const auto& existingStudent : students) {
+        if (existingStudent.getName() == student.getName()) {
+            // Якщо знайдено студента з таким же іменем, повертаємо false
+            return false;
+        }
+    }
+    // Якщо студент з таким іменем не знайдено, додаємо студента до групи
     students.push_back(student);
+    return true; // Операція успішна
 }
 
 // Встановлює назву групи
