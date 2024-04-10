@@ -1,19 +1,20 @@
 #include "Person.h"
 #include <iostream>
 
+using namespace std;
 
 Person::Person()
 :name_(""),age_(0){}
 
 // Реалізація оператора виводу
-std::ostream &operator<<(std::ostream &os, const Person &person) {
+ostream &operator<<(ostream &os, const Person &person) {
     os << "Name: " << person.getName() << ", Age: " << person.getAge();
     return os;
 }
 
 // Реалізація оператора вводу
-std::istream &operator>>(std::istream &is, Person &person) {
-    std::string name;
+istream &operator>>(istream &is, Person &person) {
+    string name;
     int age;
     is >> name >> age;
     person.setName(name);

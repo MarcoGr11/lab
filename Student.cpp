@@ -1,10 +1,11 @@
 #include "Student.h"
-#include <utility> // Для std::move
+#include <utility> 
 
-// Оператор присвоєння копіювання
+using namespace std;
+
 Student& Student::operator=(const Student& other) {
     if (this != &other) {
-        Person::operator=(other);  // Викликаємо оператор присвоєння базового класу
+        Person::operator=(other); 
         id_ = other.id_;
     }
     return *this;
@@ -14,16 +15,15 @@ Student::Student(const Student &other)
 
 }
 
-std::ostream& operator<<(std::ostream& os, const Student& student) {
+ostream& operator<<(ostream& os, const Student& student) {
     os << "Name: " << student.getName() << ", ID: " << student.getId();
     return os;
 }
 
-// Оператор присвоєння переміщення
 Student& Student::operator=(Student&& other) noexcept {
     if (this != &other) {
-        Person::operator=(std::move(other));  // Викликаємо оператор присвоєння переміщення базового класу
-        id_ = std::move(other.id_);
+        Person::operator=(move(other));  
+        id_ = move(other.id_);
     }
     return *this;
 }

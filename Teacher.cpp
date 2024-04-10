@@ -1,15 +1,19 @@
 #include "Teacher.h"
-#include <iostream> 
-Teacher::Teacher( std::string name, int age,  std::string subject) 
-    : Person(name, age), subject_(subject) {}
+#include <iostream>
 
-// Використовуйте std::cout для виводу інформації
+using namespace std;
+
+// конструктор для вчителя, ініціалізація з ім'ям, віком та предметом
+Teacher::Teacher(string name, int age, string subject) 
+    : Person(name, age), subject_(subject) {} // використовує конструктор класу Person для ім'я та віку
+
+// показує деталі про вчителя
 void Teacher::display() const {
-    Person::display();
-    std::cout << "Subject: " << subject_ << std::endl;
+    Person::display(); // виклик функції показу з класу Person
+    cout << "Subject: " << subject_ << endl; // виведення предмету вчителя
 }
 
-// Порожній деструктор
+// деструктор для вчителя, спеціальних дій не виконується
 Teacher::~Teacher() {
-    // Використання деструктора для демонстрації
+    
 }

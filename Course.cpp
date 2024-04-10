@@ -1,26 +1,28 @@
 #include "Course.h"
 #include <iostream>
 
+using namespace std;
+
 Course::Course() : courseName("Unknown"), courseCode("000"), credits(3) {}
 
-Course::Course(const std::string& name, const std::string& code, int cr)
+Course::Course(const string& name, const string& code, int cr)
     : courseName(name), courseCode(code), credits(cr) {}
 
 Course::~Course() {}
 
-void Course::setCourseName(const std::string& name) {
+void Course::setCourseName(const string& name) {
     courseName = name;
 }
 
-std::string Course::getCourseName() const {
+string Course::getCourseName() const {
     return courseName;
 }
 
-void Course::setCourseCode(const std::string& code) {
+void Course::setCourseCode(const string& code) {
     courseCode = code;
 }
 
-std::string Course::getCourseCode() const {
+string Course::getCourseCode() const {
     return courseCode;
 }
 
@@ -33,7 +35,7 @@ int Course::getCredits() const {
 }
 
 void Course::display() const {
-    std::cout << "Course Name: " << courseName 
+    cout << "Course Name: " << courseName 
               << ", Code: " << courseCode 
-              << ", Credits: " << credits << std::endl;
+              << ", Credits: " << credits <<endl;
 }

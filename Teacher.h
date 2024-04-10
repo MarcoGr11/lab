@@ -1,18 +1,23 @@
-#ifndef TEACHER_H
+#ifndef TEACHER_H 
 #define TEACHER_H
 
-#include "Person.h"
-#include <string>
+#include "Person.h" 
+#include <string> 
+using namespace std;
 
+
+// викладач  є похідним класом від персон
 class Teacher : public Person {
 public:
-    Teacher( std::string name, int age,  std::string subject);
-    ~Teacher(); // Переконайтеся, що деструктор оголошено як віртуальний
+    // конструктор, який приймає ім'я, вік і предмет
+    Teacher(string name, int age, string subject);
+    ~Teacher(); // деструктор
 
+    // віртуальна функція відображення, перевизначена з Person
     void display() const override;
 
 private:
-    std::string subject_; // Рекомендовано використовувати std::string для консистентності
+    string subject_; // предмет, який викладає вчитель
 };
 
-#endif // TEACHER_H
+#endif 

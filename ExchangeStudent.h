@@ -4,14 +4,16 @@
 #include "Student.h"
 #include <string>
 
+using namespace std;
+
 class ExchangeStudent : public Student {
 private:
-    std::string homeCountry_;  // Країна походження
+    string homeCountry_;  // Країна походження
 
 public:
-    ExchangeStudent(const std::string& name, int age, const std::string& id, const std::string& homeCountry);
+    ExchangeStudent(const string& name, int age, const string& id, const string& homeCountry);
      ~ExchangeStudent(){};
-    std::string getHomeCountry() const;
+    string getHomeCountry() const;
     virtual void display() const override;
 };
 

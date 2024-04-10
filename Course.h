@@ -3,22 +3,24 @@
 
 #include <string>
 
+using namespace std;
+
 class Course {
 private:
-    std::string courseName;
-    std::string courseCode;
+    string courseName;
+    string courseCode;
     int credits;
 
 public:
     Course();
-    Course(const std::string& courseName, const std::string& courseCode, int credits);
+    Course(const string& courseName, const string& courseCode, int credits);
     virtual ~Course();
 
-    void setCourseName(const std::string& name);
-    std::string getCourseName() const;
+    void setCourseName(const string& name);
+    string getCourseName() const;
 
-    void setCourseCode(const std::string& code);
-    std::string getCourseCode() const;
+    void setCourseCode(const string& code);
+    string getCourseCode() const;
 
     void setCredits(int cr);
     int getCredits() const;

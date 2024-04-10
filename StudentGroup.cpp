@@ -1,93 +1,93 @@
 #include "StudentGroup.h"
 
-int StudentGroup::groupCount = 0; // Ініціалізація статичного поля
+using namespace std;
 
-// Конструктор за замовчуванням
+// стат змінна для підрах кіль-ті груп
+int StudentGroup::groupCount = 0; 
+
+// конструктор за замовчуванням, ініціліз порожню назву групи і збільшує лічильник груп
 StudentGroup::StudentGroup() : groupName("") {
     ++groupCount;
 }
 
-// Перевантажений конструктор
-StudentGroup::StudentGroup(std::string name) : groupName(name) { 
+// конструктор з назвою групи, збільшує лічильник груп
+StudentGroup::StudentGroup(const string& name) : groupName(name) { 
     ++groupCount;
 }
 
-// Конструктор копіювання
+// конструктор копіювання, копіює назву групи та студентів, збільшує лічильник груп
 StudentGroup::StudentGroup(const StudentGroup& other) : groupName(other.groupName), students(other.students) {
     ++groupCount;
 }
 
-// Конструктор переміщення
-StudentGroup::StudentGroup(StudentGroup&& other) noexcept : groupName(std::move(other.groupName)), students(std::move(other.students)) {
+// конструктор переміщення, переміщує назву групи та студентів, збільшує лічильник груп
+StudentGroup::StudentGroup(StudentGroup&& other) noexcept : groupName(move(other.groupName)), students(move(other.students)) {
     ++groupCount;
-    other.groupName = ""; // Очищуємо дані у джерелі
+    other.groupName = ""; // очищує назву групи в переміщеному об'єкті
 }
 
-// Деструктор
+// деструктор, зменшує лічильник груп
 StudentGroup::~StudentGroup() {
     --groupCount;
 }
 
-// Оператор присвоєння копіюванням
+// оператор присвоєння копіюванням
 StudentGroup& StudentGroup::operator=(const StudentGroup& other) {
-    if (this != &other) { // Захист від самоприсвоєння
+    if (this != &other) { // перевірка на самоприсвоєння
         groupName = other.groupName;
         students = other.students;
     }
     return *this;
 }
 
-// Оператор присвоєння переміщенням
+// оператор присвоєння переміщенням
 StudentGroup& StudentGroup::operator=(StudentGroup&& other) noexcept {
-    if (this != &other) {
-        groupName = std::move(other.groupName);
-        students = std::move(other.students);
-        other.groupName = ""; // Очищуємо дані у джерелі
+    if (this != &other) { // перевірка на самоприсвоєння
+        groupName = move(other.groupName);
+        students = move(other.students);
+        other.groupName = ""; // очищує назву групи в переміщеному об'єкті
     }
     return *this;
 }
 
-// Додає студента до вектора студентів
+// функція для додавання студента до групи
 bool StudentGroup::addStudent(const Student& student) {
-    // Перевірка на унікальність імені студента у групі
     for (const auto& existingStudent : students) {
         if (existingStudent.getName() == student.getName()) {
-            // Якщо знайдено студента з таким же іменем, повертаємо false
-            return false;
+            return false; // якщо студент вже є, не додаємо
         }
     }
-    // Якщо студент з таким іменем не знайдено, додаємо студента до групи
-    students.push_back(student);
-    return true; // Операція успішна
+    students.push_back(student); // додавання студента
+    return true;
 }
 
-// Встановлює назву групи
-void StudentGroup::setGroupName(const std::string& groupName) {
-    this->groupName = groupName;
+// встановлення назви групи
+void StudentGroup::setGroupName(const string& name) {
+    this->groupName = name;
 }
 
-// Отримує назву групи
-std::string StudentGroup::getGroupName() const {
+// отримання назви групи
+string StudentGroup::getGroupName() const {
     return groupName;
 }
 
-// Повертає кількість створених груп
+// отримання загальної кіл-ті груп
 int StudentGroup::getGroupCount() {
     return groupCount;
 }
 
-// Оператор виведення
-std::ostream& operator<<(std::ostream& os, const StudentGroup& group) {
+// оператор виведення
+ostream& operator<<(ostream& os, const StudentGroup& group) {
     os << "Group Name: " << group.groupName << "\nStudents:\n";
     for (const auto& student : group.students) {
-        os << student.getName() << "\n"; 
+        os << student.getName() << "\n"; // виведення імен студентів групи
     }
     return os;
 }
 
-// Оператор введення
-std::istream& operator>>(std::istream& is, StudentGroup& group) {
-    std::cout << "Enter group name: ";
+// оператор введення
+istream& operator>>(istream& is, StudentGroup& group) {
+    cout << "Enter group name: ";
     is >> group.groupName;
 
     return is;

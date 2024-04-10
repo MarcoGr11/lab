@@ -4,38 +4,43 @@
 #include "Person.h"
 #include <string>
 
+using namespace std;
+
+// клас Student, що є підкласом Person
 class Student : public Person {
 private:
-    std::string id_;  // Унікальний ідентифікатор студента
+    string id_;  // унікальний ідентифікатор студента
+
 public:
-    // Конструктор за замовчуванням
+    // конструктор за замовчуванням, встановлює порожній ідентифікатор
     Student() : Person(), id_("") {}
 
-    // Параметризований конструктор
-    Student( std::string name, int age, std::string id) 
+    // конструктор з параметрами для ініціалізації імені, віку та ідентифікатора
+    Student(string name, int age, string id) 
         : Person(name, age), id_(id) {}
 
-        Student(const Student& other);
+    // конструктор копіювання
+    Student(const Student& other);
 
     // деструктор
      ~Student(){}
 
-    // Геттер для ID
-    std::string getId() const { return id_; }
+    // гетер для ідентифікатора
+    string getId() const { return id_; }
 
-    // Сеттер для ID
-    void setId( std::string& id) { id_ = id; }
+    // сетер для ідентифікатора
+    void setId( string& id) { id_ = id; }
 
-    // Метод для виведення інформації про студента
+    // перевизначення методу display з базового класу Person для виведення ідентифікатора
     virtual void display() const override {
         Person::display();
-        std::cout << "ID: " << id_ << std::endl;
+        cout << "ID: " << id_ <<endl;
     }
 
-    // Оператор присвоєння копіювання
+    // оператор присвоєння копіюванням
     Student& operator=(const Student& other);
 
-    // Оператор присвоєння переміщення
+    // оператор присвоєння переміщенням
     Student& operator=(Student&& other) noexcept;
 };
    

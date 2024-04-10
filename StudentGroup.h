@@ -6,15 +6,17 @@
 #include <string>
 #include <iostream>
 
+using namespace std;
+
 class StudentGroup {
 private:
     static int groupCount; // статичне поле для підрахунку кіл-ті груп
-    std::vector<Student> students; // список студентів у групі
-    std::string groupName; // назва групи
+    vector<Student> students; // список студентів у групі
+    string groupName; // назва групи
 
 public:
     StudentGroup(); // конструктор за замовчуванням
-    explicit StudentGroup(const std::string& name); // перевантажений конструктор
+    explicit StudentGroup(const string& name); // перевантажений конструктор
     StudentGroup(const StudentGroup& other); // конструктор копіювання
     StudentGroup(StudentGroup&& other) noexcept; // конструктор переміщення
     ~StudentGroup(); // деструктор
@@ -23,13 +25,13 @@ public:
     StudentGroup& operator=(StudentGroup&& other) noexcept; // оператор присвоєння переміщенням
 
     bool addStudent(const Student& student); // додає студента до групи
-    void setGroupName(const std::string& name); // встановлює назву групи
-    std::string getGroupName() const; // повертає назву групи
+    void setGroupName(const string& name); // встановлює назву групи
+    string getGroupName() const; // повертає назву групи
 
     static int getGroupCount(); // повертає кількість створених груп
 
-    friend std::ostream& operator<<(std::ostream& os, const StudentGroup& group); // оператор виведення
-    friend std::istream& operator>>(std::istream& is, StudentGroup& group); // оператор введення
+    friend ostream& operator<<(ostream& os, const StudentGroup& group); // оператор виведення
+    friend istream& operator>>(istream& is, StudentGroup& group); // оператор введення
 };
 
 #endif // STUDENTGROUP_H
