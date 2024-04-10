@@ -18,5 +18,7 @@ std::istream &operator>>(std::istream &is, Person &person) {
     is >> name >> age;
     person.setName(name);
     person.setAge(age);
+    
     return is;
+
 }

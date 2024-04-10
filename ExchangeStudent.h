@@ -10,11 +10,11 @@ private:
 
 public:
     ExchangeStudent(const std::string& name, int age, const std::string& id, const std::string& homeCountry);
-    virtual ~ExchangeStudent() override;
+     ~ExchangeStudent(){};
     std::string getHomeCountry() const;
     virtual void display() const override;
 };
 
-#endif // EXCHANGESTUDENT_H
+#endif 
 
 

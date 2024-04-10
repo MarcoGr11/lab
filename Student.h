@@ -17,8 +17,8 @@ public:
 
         Student(const Student& other);
 
-    // Віртуальний деструктор
-     ~Student() override {}
+    // деструктор
+     ~Student(){}
 
     // Геттер для ID
     std::string getId() const { return id_; }

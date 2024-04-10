@@ -10,16 +10,17 @@ protected:
     int age_;
 
 public:
-
+    void setName(const std::string& name) {
+        this->name_ = name;
+    };
+   
     Person();
 
     // Параметризований конструктор
     Person( std::string& name, int age) : name_(name), age_(age) {}
-
     Person(const std::string& name, int age):name_(name),age_(age){}
 
-    // Віртуальний деструктор для коректного очищення у випадку наслідування
-    virtual ~Person() {}
+    ~Person() {}
 
     // Віртуальний метод для виведення інформації, щоб похідні класи могли його перевизначити
     virtual void display() const {

@@ -38,13 +38,13 @@ int main() {
     student2.display();
     student3.display();
 
-//    cout << "\nExchange Students:" << endl;
-//    exchangeStudent1.display();
-//    exchangeStudent2.display();
-//
-//    cout << "\nCourses:" << endl;
-//    course1.display();
-//    course2.display();
+    cout << "\nExchange Students:" << endl;
+    exchangeStudent1.display();
+    exchangeStudent2.display();
+
+    cout << "\nCourses:" << endl;
+    course1.display();
+    course2.display();
 
     return 0;
 }

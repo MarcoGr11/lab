@@ -4,11 +4,10 @@
 #include "Person.h"
 #include <string>
 
-/// @brief 
 class Teacher : public Person {
 public:
     Teacher( std::string name, int age,  std::string subject);
-    virtual ~Teacher() override; // Переконайтеся, що деструктор оголошено як віртуальний
+    ~Teacher(); // Переконайтеся, що деструктор оголошено як віртуальний
 
     void display() const override;
 

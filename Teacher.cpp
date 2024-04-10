@@ -1,7 +1,5 @@
 #include "Teacher.h"
-#include <iostream> // Додайте для доступу до std::cout
-
-// Використовуйте std::string у визначенні параметрів
+#include <iostream> 
 Teacher::Teacher( std::string name, int age,  std::string subject) 
     : Person(name, age), subject_(subject) {}
 

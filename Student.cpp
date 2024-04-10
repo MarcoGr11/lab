@@ -9,10 +9,14 @@ Student& Student::operator=(const Student& other) {
     }
     return *this;
 }
-
 Student::Student(const Student &other)
 :Person(other.name_,other.age_),id_(other.id_){
 
+}
+
+std::ostream& operator<<(std::ostream& os, const Student& student) {
+    os << "Name: " << student.getName() << ", ID: " << student.getId();
+    return os;
 }
 
 // Оператор присвоєння переміщення
