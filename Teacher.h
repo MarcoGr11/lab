@@ -14,11 +14,11 @@ public:
     Teacher(string name, int age, string subject);
     ~Teacher(); // деструктор
 
-    // віртуальна функція відображення, перевизначена з Person
+    // віртуальна функція відображення, перевизначена з персон
     void display() const override;
 
 private:
-    string subject_; // предмет, який викладає вчитель
+    string subject_; 
 };
 
 #endif 

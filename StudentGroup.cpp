@@ -10,17 +10,17 @@ StudentGroup::StudentGroup() : groupName("") {
     ++groupCount;
 }
 
-// конструктор з назвою групи, збільшує лічильник груп
+// конструктор з назвою групи збільшує лічильник груп
 StudentGroup::StudentGroup(const string& name) : groupName(name) { 
     ++groupCount;
 }
 
-// конструктор копіювання, копіює назву групи та студентів, збільшує лічильник груп
+// конструктор копіюв копіює назву групи та студентів збільшує лічильник груп
 StudentGroup::StudentGroup(const StudentGroup& other) : groupName(other.groupName), students(other.students) {
     ++groupCount;
 }
 
-// конструктор переміщення, переміщує назву групи та студентів, збільшує лічильник груп
+// конструктор переміщ переміщує назву групи та студ  збільшує лічильник груп
 StudentGroup::StudentGroup(StudentGroup&& other) noexcept : groupName(move(other.groupName)), students(move(other.students)) {
     ++groupCount;
     other.groupName = ""; // очищує назву групи в переміщеному об'єкті

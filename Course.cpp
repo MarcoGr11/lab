@@ -3,47 +3,47 @@
 
 using namespace std;
 
-// Конструктор за замовчуванням, ініціалізує курс з базовими значеннями
+// конструктор за замовч
 Course::Course() : courseName("Unknown"), courseCode("000"), credits(3) {}
 
-// Конструктор з параметрами для ініціалізації курсу з назвою, кодом та кількістю кредитів
+// конструктор з параметрами для ініціаліз
 Course::Course(const string& name, const string& code, int cr)
     : courseName(name), courseCode(code), credits(cr) {}
 
-// Деструктор
+// деструктор
 Course::~Course() {}
 
-// Встановлює назву курсу
+// встановлює назву курсу
 void Course::setCourseName(const string& name) {
     courseName = name;
 }
 
-// Повертає назву курсу
+// повертає назв курсу
 string Course::getCourseName() const {
     return courseName;
 }
 
-// Встановлює код курсу
+// встановлює код курсу
 void Course::setCourseCode(const string& code) {
     courseCode = code;
 }
 
-// Повертає код курсу
+// повертає код курсу
 string Course::getCourseCode() const {
     return courseCode;
 }
 
-// Встановлює кількість кредитів курсу
+// встановлює кіл-ть кредитів курсу
 void Course::setCredits(int cr) {
     credits = cr;
 }
 
-// Повертає кількість кредитів курсу
+// повертає кіл-ть кредитів курсу
 int Course::getCredits() const {
     return credits;
 }
 
-// Відображає інформацію про курс
+// відображ інфо про курс !!!!!!!!!!!!!!!!
 void Course::display() const {
     cout << "Course Name: " << courseName 
          << ", Code: " << courseCode 

@@ -6,23 +6,23 @@
 
 using namespace std;
 
-// Клас обмінного студента, який наслідує від класу Student
+
 class ExchangeStudent : public Student {
 private:
-    string homeCountry_; // країна походження студента
+    string homeCountry_; 
 
 public:
-    // Конструктор, який ініціалізує ExchangeStudent із ім'ям, віком, ідентифікатором та країною
+    // конструктор  який ініціаліз студ по обмін із ім. вік  ідентифік та країною
     ExchangeStudent(const string& name, int age, const string& id, const string& homeCountry);
 
-    // Деструктор
+    // деструктор
     ~ExchangeStudent(){};
 
-    // Геттер для поля homeCountry
+    // геттер 
     string getHomeCountry() const;
 
-    // Перевизначення методу display для виведення інформації про обмінного студента
+    // перевизнач методу дісплей для вивед інформації про обмін студ
     virtual void display() const override;
 };
 
-#endif // EXCHANGESTUDENT_H
+#endif 

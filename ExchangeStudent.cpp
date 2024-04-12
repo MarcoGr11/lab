@@ -3,12 +3,12 @@
 
 using namespace std;
 
-// Конструктор класу ExchangeStudent, що ініціалізує як базовий клас Student, так і країну походження
+// конструктор класу  що ініціаліз клас студент так і країну походж
 ExchangeStudent::ExchangeStudent(const string& name, int age, const string& id, const string& homeCountry)
-    : Student(name, age, id), homeCountry_(homeCountry) {} // Використання списку ініціалізації для встановлення значень
+    : Student(name, age, id), homeCountry_(homeCountry) {}
 
-// Перевизначений метод display, який викликає відповідний метод базового класу та виводить країну походження
+// перевизнач метод display який виклик відповід метод  класу та вивод країну
 void ExchangeStudent::display() const {
-    Student::display(); // Виклик методу display з базового класу Student
-    cout << "Home Country: " << homeCountry_ << endl; // Додаткове виведення країни походження студента
+    Student::display(); 
+    cout << "Home Country: " << homeCountry_ << endl; 
 }

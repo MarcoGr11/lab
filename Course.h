@@ -5,38 +5,37 @@
 
 using namespace std;
 
-// Клас Course, що представляє навчальний курс
 class Course {
 private:
-    string courseName; // Назва курсу
-    string courseCode; // Код курсу
-    int credits; // Кількість кредитів курсу
+    string courseName; 
+    string courseCode; 
+    int credits; 
 
 public:
-    // Конструктор за замовчуванням
+    // Конструктор за замовч
     Course();
-    // Конструктор з параметрами для ініціалізації назви, коду та кількості кредитів
+    // конструктор з параметр для ініціаліз назви коду  кіл-ті кредит
     Course(const string& courseName, const string& courseCode, int credits);
-    // Віртуальний деструктор
-    virtual ~Course();
+    //деструктор
+    ~Course();
 
-    // Сеттер для назви курсу
+    // сеттер для назви курсу
     void setCourseName(const string& name);
-    // Геттер для назви курсу
+    // геттер для назви курсу
     string getCourseName() const;
 
-    // Сеттер для коду курсу
+    // сеттер  коду курс
     void setCourseCode(const string& code);
-    // Геттер для коду курсу
+    // геттер  коду курс
     string getCourseCode() const;
 
-    // Сеттер для кількості кредитів курсу
+    // сеттер для кіл-ті кредит курс
     void setCredits(int cr);
-    // Геттер для кількості кредитів курсу
+    // геттер для кіл-ті кредит курс
     int getCredits() const;
 
-    // Метод для відображення інформації про курс
+    // метод для відображ інфо про курс !!!!!!!!!!!!!!
     void display() const;
 };
 
-#endif // COURSE_H
+#endif 

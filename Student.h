@@ -6,16 +6,16 @@
 
 using namespace std;
 
-// клас Student, що є підкласом Person
+
 class Student : public Person {
 private:
-    string id_;  // унікальний ідентифікатор студента
+    string id_; 
 
 public:
-    // конструктор за замовчуванням, встановлює порожній ідентифікатор
+    // конструктор за замовч
     Student() : Person(), id_("") {}
 
-    // конструктор з параметрами для ініціалізації імені, віку та ідентифікатора
+    // конструктор з параметрами для ініціалізації імені, віку та ідентифік
     Student(string name, int age, string id) 
         : Person(name, age), id_(id) {}
 
@@ -25,23 +25,23 @@ public:
     // деструктор
      ~Student(){}
 
-    // гетер для ідентифікатора
+    // гетер для ідентифік
     string getId() const { return id_; }
 
-    // сетер для ідентифікатора
+    // сетер для ідентифік
     void setId( string& id) { id_ = id; }
 
-    // перевизначення методу display з базового класу Person для виведення ідентифікатора
+    // перевизнач методу display з базового класу персон для виведення ідентифік
     virtual void display() const override {
-        Person::display();
-        cout << "ID: " << id_ <<endl;
-    }
+    Person::display();
+    cout << "ID: " << id_ <<endl;
+   }
 
-    // оператор присвоєння копіюванням
+    // опер присв копіюв
     Student& operator=(const Student& other);
 
-    // оператор присвоєння переміщенням
+    // опер присв переміщ !!!!!!!!!!!!!!!!!
     Student& operator=(Student&& other) noexcept;
 };
    
-#endif // STUDENT_H
+#endif 

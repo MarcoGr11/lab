@@ -29,7 +29,7 @@ int main() {
     // ще один курс
     Course course2("English", "ENGL301", 5);
 
-    // Виведення інформації
+    // виведення інфо
     cout << "Teachers:" << endl;
     teacher1.display();
     teacher2.display();

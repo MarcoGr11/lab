@@ -6,14 +6,14 @@
 
 using namespace std;
 
-// Базовий клас Особа, що містить ім'я та вік
+
 class Person {
 protected:
-    string name_; // ім'я особи
-    int age_; // вік особи
+    string name_; 
+    int age_; 
 
 public:
-    // конструктор за замовчуванням
+    // конструктор за замовч
     Person();
 
     // конструктор з параметрами для ім'я та віку
@@ -24,9 +24,9 @@ public:
     // деструктор
     ~Person() {}
 
-    // віртуальний метод виведення інформації про особу
+    // віртуальний метод вивед інфо про особу
     virtual void display() const {
-        cout << "Name: " << name_ << ", Age: " << age_ << endl;
+    cout << "Name: " << name_ << ", Age: " << age_ << endl;
     }
 
     // гетер для ім'я
@@ -40,4 +40,4 @@ public:
     void setAge(int age) { age_ = age; }
 };
 
-#endif // PERSON_H
+#endif 
