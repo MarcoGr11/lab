@@ -8,14 +8,14 @@ using namespace std;
 
 
 // викладач  є похідним класом від персон
-class Teacher : public Person {
+class Teacher final : public Person {
 public:
     // конструктор, який приймає ім'я, вік і предмет
     Teacher(string name, int age, string subject);
     ~Teacher(); // деструктор
 
     // віртуальна функція відображення, перевизначена з персон
-    void display() const override;
+    virtual void display() const override;
 
 private:
     string subject_; 

@@ -16,7 +16,7 @@ public:
     ExchangeStudent(const string& name, int age, const string& id, const string& homeCountry);
 
     // деструктор
-    ~ExchangeStudent(){};
+    virtual ~ExchangeStudent(){};
 
     // геттер 
     string getHomeCountry() const;

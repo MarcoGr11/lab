@@ -5,6 +5,7 @@
 #include "Course.h"
 #include <iostream>
 #include <vector>
+#include <memory>
 using namespace std;
 
 int main() {
@@ -46,6 +47,18 @@ int main() {
     cout << "\nCourses:" << endl;
     course1.display();
     course2.display();
+
+   // вектор вказівників на клас персон для демонстр динам поліморф
+    vector<unique_ptr<Person>> people;
+    people.push_back(make_unique<Teacher>("Alice Johnson", 31, "Object-Oriented Programming"));
+    people.push_back(make_unique<Student>("John Warzone", 20, "S001"));
+    people.push_back(make_unique<ExchangeStudent>("Kaushik Twar", 23, "S004", "India"));
+
+    // динам поліморф
+    cout << "\nDynamic Polymorphism Display:" << endl;
+    for (const auto& person : people) {
+        person->display();
+    }
 
     return 0;
 }

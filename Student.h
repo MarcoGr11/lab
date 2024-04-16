@@ -23,7 +23,7 @@ public:
     Student(const Student& other);
 
     // деструктор
-     ~Student(){}
+    virtual ~Student(){}
 
     // гетер для ідентифік
     string getId() const { return id_; }
