@@ -19,7 +19,7 @@ public:
     virtual ~ExchangeStudent(){};
 
     // геттер 
-    string getHomeCountry() const;
+    string getHomeCountry() const { return homeCountry_;}
 
     // перевизнач методу дісплей для вивед інформації про обмін студ
     virtual void display() const override;

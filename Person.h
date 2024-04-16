@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "IDisplayable.h"
 
 using namespace std;
 
@@ -25,18 +26,16 @@ public:
     virtual ~Person() {}
 
     // віртуальний метод вивед інфо про особу
-    virtual void display() const {
+    virtual void display() const  {
     cout << "Name: " << name_ << ", Age: " << age_ << endl;
     }
 
-    // гетер для ім'я
+    // гетер та сетер  для ім'я
     string getName() const { return name_; }
-    // сетер для ім'я
     void setName(string &name) { name_ = name; }
 
-    // гетер для віку
+    // гетер та сетер  для віку
     int getAge() const { return age_; }
-    // сетер для віку
     void setAge(int age) { age_ = age; }
 };
 
