@@ -21,8 +21,8 @@ public:
     // конструктор з параметрами для ім'я та віку, ім'я передається як константа
     Person(const string& name, int age): name_(name), age_(age){}
 
-    // деструктор
-    ~Person() {}
+    // віртуал деструктор
+    virtual ~Person() {}
 
     // віртуальний метод вивед інфо про особу
     virtual void display() const {
