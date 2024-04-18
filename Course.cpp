@@ -43,7 +43,7 @@ int Course::getCredits() const {
     return credits;
 }
 
-// відображ інфо про курс !!!!!!!!!!!!!!!!
+// відображ інфо про курс 
 void Course::display() const {
     cout << "Course Name: " << courseName 
          << ", Code: " << courseCode 

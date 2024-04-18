@@ -14,6 +14,10 @@ private:
 public:
     // конструктор за замовч
     Student() : Person(), id_("") {}
+   
+    string getRole() const override {
+    return "Student";
+}
 
     // конструктор з параметрами для ініціалізації імені, віку та ідентифік
     Student(string name, int age, string id) 
@@ -22,14 +26,14 @@ public:
     // конструктор копіювання
     Student(const Student& other);
 
-    // деструктор
+    // деструктор (Virtual destructor)
     virtual ~Student(){}
 
-    // гетер та сетер для ідентифік
+    // гетер та сетер для ідентифік (Static Method Binding)
     string getId() const { return id_; }
     void setId( string& id) { id_ = id; }
 
-    // перевизнач методу display з базового класу персон для виведення ідентифік
+    // перевизнач методу display з базового класу персон для виведення ідентифік ( Run-time (Override) )
     virtual void display() const override {
     Person::display();
     cout << "ID: " << id_ <<endl;

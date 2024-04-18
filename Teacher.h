@@ -14,9 +14,13 @@ class Teacher final : public Person {
 public:
     // конструктор, який приймає ім'я, вік і предмет
     Teacher(string name, int age, string subject);
-    virtual ~Teacher(); // деструктор
+    virtual ~Teacher(); // деструктор (Virtual destructor)
+    
+    string getRole() const override {
+    return "Teacher";
+}
 
-    // віртуальна функція відображення, перевизначена з персон
+    // перевизначена віртуальна функція відображ з персон ( Run-time (Override))
     virtual void display() const override;
 
 private:

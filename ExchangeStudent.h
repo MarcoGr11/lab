@@ -14,11 +14,15 @@ private:
 public:
     // конструктор  який ініціаліз студ по обмін із ім. вік  ідентифік та країною
     ExchangeStudent(const string& name, int age, const string& id, const string& homeCountry);
+    
+    string getRole() const override {
+    return "Exchange Student";
+}
 
     // деструктор
     virtual ~ExchangeStudent(){};
 
-    // геттер 
+    // геттер  (Static Method Binding)
     string getHomeCountry() const { return homeCountry_;}
 
     // перевизнач методу дісплей для вивед інформації про обмін студ

@@ -51,7 +51,7 @@ int main() {
     course1.display();
     course2.display();
 
-   // вектор вказівників на клас персон для демонстр динам поліморф
+   // вектор вказівників на клас персон для демонстр динам поліморф (Base class reference)
     vector<unique_ptr<Person>> people;
     people.push_back(make_unique<Teacher>("Alice Johnson", 31, "Object-Oriented Programming"));
     people.push_back(make_unique<Student>("John Warzone", 20, "S001"));

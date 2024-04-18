@@ -7,7 +7,7 @@ using namespace std;
 Teacher::Teacher(string name, int age, string subject) 
     : Person(name, age), subject_(subject) {} // використовує конструктор класу персон для ім'я та віку
 
-// показує деталі про вчителя 
+// показує деталі про вчителя  (Static Method Binding)
     void Teacher::display() const {
     Person::display(); // виклик функції показу з класу Person
     cout << "Subject: " << subject_ << endl; // виведення предмету вчителя
