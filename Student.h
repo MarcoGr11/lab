@@ -42,7 +42,7 @@ public:
     // опер присв копіюв
     Student& operator=(const Student& other);
 
-    // опер присв переміщ !!!!!!!!!!!!!!!!!
+    // опер присв переміщ 
     Student& operator=(Student&& other) noexcept;
 };
    

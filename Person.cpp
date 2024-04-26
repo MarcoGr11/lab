@@ -9,7 +9,7 @@ Person::Person()
 
 // перевантаж операт вивед для класу персон
 ostream &operator<<(ostream &os, const Person &person) {
-    os << "Name: " << person.getName() << ", Age: " << person.getAge(); // формат та вивед ім'я та віку особи
+    os << "Name: " << person.getName() << ", Age: " << person.getAge();
     return os;
 }
 
@@ -17,9 +17,9 @@ ostream &operator<<(ostream &os, const Person &person) {
     istream &operator>>(istream &is, Person &person) {
     string name;
     int age;
-    is >> name >> age; // чит ім'я та віку з поток вводу
-    person.setName(name); // встанов ім'я особи
-    person.setAge(age); // встанов віку особи
+    is >> name >> age; 
+    person.setName(name); 
+    person.setAge(age); 
     
     return is;
 }

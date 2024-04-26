@@ -8,11 +8,9 @@
 
 using namespace std;
 
-
-// викладач  є похідним класом від персон
 class Teacher final : public Person {
 public:
-    // конструктор, який приймає ім'я, вік і предмет
+    // конструктор
     Teacher(string name, int age, string subject);
     virtual ~Teacher(); // деструктор (Virtual destructor)
     
@@ -20,7 +18,7 @@ public:
     return "Teacher";
 }
 
-    // перевизначена віртуальна функція відображ з персон ( Run-time (Override))
+    // перевизначена віртуал функ відображ з персон ( Run-time (Override))
     virtual void display() const override;
 
 private:

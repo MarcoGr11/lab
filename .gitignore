@@ -1,4 +1,5 @@
 .vscode/
 .output/
 .build/Debug
+.\build
 gif

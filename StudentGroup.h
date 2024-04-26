@@ -10,9 +10,9 @@ using namespace std;
 
 class StudentGroup {
 private:
-    static int groupCount; // статичне поле для підрахунку кіл-ті груп
-    vector<Student> students; // список студентів у групі
-    string groupName; // назва групи
+    static int groupCount; 
+    vector<Student>students; 
+    string groupName;
 
 public:
     StudentGroup(); // конструктор за замовчуванням

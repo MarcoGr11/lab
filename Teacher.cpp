@@ -3,17 +3,17 @@
 
 using namespace std;
 
-// конструктор для вчителя, ініціаліз з ім'ям, віком та предметом
+// конструктор 
 Teacher::Teacher(string name, int age, string subject) 
-    : Person(name, age), subject_(subject) {} // використовує конструктор класу персон для ім'я та віку
+    : Person(name, age), subject_(subject) {} 
 
-// показує деталі про вчителя  (Static Method Binding)
+// показує деталі про вчителя
     void Teacher::display() const {
-    Person::display(); // виклик функції показу з класу Person
-    cout << "Subject: " << subject_ << endl; // виведення предмету вчителя
+    Person::display(); 
+    cout << "Subject: " << subject_ << endl;
 }
 
-// деструктор для вчителя
+// деструктор 
 Teacher::~Teacher() {
     
 }

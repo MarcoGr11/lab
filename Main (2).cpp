@@ -58,7 +58,7 @@ int main() {
     people.push_back(make_unique<ExchangeStudent>("Kaushik Twar", 23, "S004", "India"));
 
     // динам поліморф
-    cout << "\nDynamic Polymorphism Display:" << endl;
+    cout << "\ndynamic polymorph display:" << endl;
     for (const auto& person : people) {
         person->display();
     }
