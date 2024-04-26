@@ -19,7 +19,7 @@ public:
     return "Exchange Student";
 }
 
-    // деструктор
+    //  виртуал деструктор
     virtual ~ExchangeStudent(){};
 
     // геттер  (Static Method Binding)
