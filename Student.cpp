@@ -12,7 +12,7 @@ Student& Student::operator=(const Student& other) {
     return *this;
 }
 
-// конструкт коп, ініціаліз поля з іншого об'єкта студент (Static Method Binding)
+// конструкт коп, ініціаліз поля з іншого об'єкта студен
 Student::Student(const Student &other)
 :Person(other.name_, other.age_), id_(other.id_) {
   

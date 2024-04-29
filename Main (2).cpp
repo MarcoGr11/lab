@@ -1,66 +1,181 @@
+#include <iostream>
+#include <string>
+#include <fstream>
 #include "Person.h"
 #include "Student.h"
 #include "Teacher.h"
-#include "ExchangeStudent.h"
 #include "Course.h"
-#include "IDisplayable.h"
-
-#include <iostream>
-#include <vector>
-#include <memory>
+#include "StudentGroup.h"
+#include "ExchangeStudent.h"
 
 using namespace std;
 
+bool authenticateAdmin() {
+    string password;
+    cout << "Please enter admin password: ";
+    cin >> password;
+    return password == "admin123";
+}
+
+void saveToFile(const string& data, const string& filename) {
+    ofstream file(filename, ios::app); // Відкрити файл для дописування
+    if (file.is_open()) {
+        file << data << endl;
+        file.close();
+    } else {
+        cout << "Unable to open file\n";
+    }
+}
+
+void adminMenu() {
+    int choice;
+    do {
+        cout << "Admin Menu\n";
+        cout << "1. Add Student\n";
+        cout << "2. Add Teacher\n";
+        cout << "3. Add Course\n";
+        cout << "4. Add Exchange Student\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1: {
+                string name, surname, group, data;
+                int age;
+                cout << "Enter student's first name: ";
+                cin >> name;
+                cout << "Enter student's surname: ";
+                cin >> surname;
+                cout << "Enter student's age: ";
+                cin >> age;
+                cout << "Enter student's group: ";
+                cin >> group;
+    
+                data = "Student: " + name + " " + surname + ", " + to_string(age) + ", " + group;
+                saveToFile(data, "students.txt");
+                cout << "Student added and saved successfully!\n";
+                break;
+            }
+            case 2: {
+                string name, surname, subject, data;
+                int age;
+                cout << "Enter teacher's first name: ";
+                cin >> name;
+                cout << "Enter teacher's surname: ";
+                cin >> surname;
+                cout << "Enter teacher's age: ";
+                cin >> age;
+                cout << "Enter teacher's subject: ";
+                cin >> subject;
+    
+                data = "Teacher: " + name + " " + surname + ", " + to_string(age) + ", " + subject;
+                saveToFile(data, "teachers.txt");
+                cout << "Teacher added and saved successfully!\n";
+                break;
+            }
+            
+            case 3: {
+                string courseName, data;
+                int creditHours;
+                cout << "Enter course name: ";
+                cin >> courseName;
+                cout << "Enter credit hours: ";
+                cin >> creditHours;
+                
+                data = "Course: " + courseName + ", " + to_string(creditHours);
+                saveToFile(data, "courses.txt");
+                cout << "Course added and saved successfully!\n";
+                break;
+            }
+            case 4: {
+                string name, surname, course, country, data;
+                int age;
+                cout << "Enter exchange student's first name: ";
+                cin >> name;
+                cout << "Enter exchange student's surname: ";
+                cin >> surname;
+                cout << "Enter exchange student's age: ";
+                cin >> age;
+                cout << "Enter exchange student's course: ";
+                cin >> course;
+                cout << "Enter exchange student's country: ";
+                cin >> country;
+                
+                data = "Exchange Student: " + name + " " + surname + ", " + to_string(age) + ", " + course + ", " + country;
+                saveToFile(data, "exchange_students.txt");
+                cout << "Exchange student added and saved successfully!\n";
+                break;
+            }
+            case 5:
+                cout << "Exiting admin menu.\n";
+                return;
+            default:
+                cout << "Invalid choice.\n";
+        }
+    } while (choice != 5);
+}
+void displayData(const string& filename) {
+    ifstream file(filename);
+    string line;
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            cout << line << endl;
+        }
+        file.close();
+    } else {
+        cout << "Unable to open file\n";
+    }
+}
+
+void userMenu() {
+    int choice;
+    do {
+        cout << "User Menu\n";
+        cout << "1. View Students\n";
+        cout << "2. View Teachers\n";
+        cout << "3. View Courses\n";
+        cout << "4. View Exchange Students\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                cout << "Students:\n";
+                displayData("students.txt");
+                break;
+            case 2:
+                cout << "Teachers:\n";
+                displayData("teachers.txt");
+                break;
+            case 3:
+                cout << "Courses:\n";
+                displayData("courses.txt");
+                break;
+            case 4:
+                cout << "Exchange Students:\n";
+                displayData("exchange_students.txt");
+                break;
+            case 5:
+                cout << "Exiting user menu.\n";
+                return;
+            default:
+                cout << "Invalid choice. Please enter a number between 1 and 5.\n";
+        }
+    } while (choice != 5);
+}
+
+
 int main() {
-    //  викладач
-    Teacher teacher1("Alice Johnson", 31, "Object-Oriented Programming ");
-    // викладач
-    Teacher teacher2("Bob Smith", 55, "English");
-
-    //  студент
-    Student student1("John Warzone", 20, "S001");
-    Student student2("Jane Flex", 22, "S002");
-    // студент
-    Student student3("Mark Spark", 21, "S003");
-
-    //  обміннй студент
-    ExchangeStudent exchangeStudent1("Kaushik Twar", 23, "S004", "India");
-    // обмінний студент
-    ExchangeStudent exchangeStudent2("Abebe Akobebe", 24, "S005", "Africa");
-
-    //  курси
-    Course course1("Object-Oriented Programming", "OOP101", 3);
-    // ще один курс
-    Course course2("English", "ENGL301", 5);
-
-    // виведення інфо
-    cout << "Teachers:" << endl;
-    teacher1.display();
-    teacher2.display();
-
-    cout << "\nStudents:" << endl;
-    student1.display();
-    student2.display();
-    student3.display();
-
-    cout << "\nExchange Students:" << endl;
-    exchangeStudent1.display();
-    exchangeStudent2.display();
-
-    cout << "\nCourses:" << endl;
-    course1.display();
-    course2.display();
-
-   // вектор вказівників на клас персон для демонстр динам поліморф (Base class reference)
-    vector<unique_ptr<Person>> people;
-    people.push_back(make_unique<Teacher>("Alice Johnson", 31, "Object-Oriented Programming"));
-    people.push_back(make_unique<Student>("John Warzone", 20, "S001"));
-    people.push_back(make_unique<ExchangeStudent>("Kaushik Twar", 23, "S004", "India"));
-
-    // динам поліморф
-    cout << "\ndynamic polymorph display:" << endl;
-    for (const auto& person : people) {
-        person->display();
+    int userType;
+    cout << "Select login type (1 for Admin, 2 for User): ";
+    cin >> userType;
+    
+    if (userType == 1 && authenticateAdmin()) {
+        adminMenu();
+    } else if (userType == 2) {
+        userMenu();
+    } else {
+        cout << "Invalid login or not authorized.\n";
     }
 
     return 0;
