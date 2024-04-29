@@ -10,6 +10,13 @@
 
 using namespace std;
 
+
+void saveToFile(const string& data, const string& filename);
+void displayData(const string& filename);
+void adminMenu();
+void userMenu();
+void saveSuggestion(const string& suggestion);
+
 bool authenticateAdmin() {
     string password;
     cout << "Please enter admin password: ";
@@ -35,7 +42,8 @@ void adminMenu() {
         cout << "2. Add Teacher\n";
         cout << "3. Add Course\n";
         cout << "4. Add Exchange Student\n";
-        cout << "5. Exit\n";
+        cout << "5. View Suggestions\n";
+        cout << "6. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
         switch (choice) {
@@ -106,13 +114,17 @@ void adminMenu() {
                 cout << "Exchange student added and saved successfully!\n";
                 break;
             }
-            case 5:
+              case 5:
+                cout << "Viewing Suggestions:\n";
+                displayData("suggestions.txt");
+                break;
+              case 6:
                 cout << "Exiting admin menu.\n";
                 return;
             default:
                 cout << "Invalid choice.\n";
         }
-    } while (choice != 5);
+    } while (choice != 6);
 }
 void displayData(const string& filename) {
     ifstream file(filename);
@@ -127,6 +139,17 @@ void displayData(const string& filename) {
     }
 }
 
+void saveSuggestion(const string& suggestion) {
+    ofstream file("suggestions.txt", ios::app);
+    if (file.is_open()) {
+        file << suggestion << endl;
+        file.close();
+        cout << "Thank you! Your suggestion has been saved." << endl;
+    } else {
+        cout << "Unable to open the suggestions file." << endl;
+    }
+}
+
 void userMenu() {
     int choice;
     do {
@@ -135,7 +158,8 @@ void userMenu() {
         cout << "2. View Teachers\n";
         cout << "3. View Courses\n";
         cout << "4. View Exchange Students\n";
-        cout << "5. Exit\n";
+        cout << "5. Leave a Suggestion\n";
+        cout << "6. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
         switch (choice) {
@@ -155,14 +179,23 @@ void userMenu() {
                 cout << "Exchange Students:\n";
                 displayData("exchange_students.txt");
                 break;
-            case 5:
+            case 5: {
+                cin.ignore();  // Очищення буферу вводу
+                string suggestion;
+                cout << "Please type your suggestion and press enter: ";
+                getline(cin, suggestion);
+                saveSuggestion(suggestion);
+                break;
+            }
+            case 6:
                 cout << "Exiting user menu.\n";
                 return;
             default:
-                cout << "Invalid choice. Please enter a number between 1 and 5.\n";
+                cout << "Invalid choice. Please enter a number between 1 and 6.\n";
         }
-    } while (choice != 5);
+    } while (choice != 6);
 }
+
 
 
 int main() {
