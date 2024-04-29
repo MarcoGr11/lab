@@ -1,2 +1,3 @@
 Course: English, 4
 Course: Math, 4
+Course: History, 4

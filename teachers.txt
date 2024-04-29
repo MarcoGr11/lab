@@ -1,2 +1,4 @@
 Teacher: Nansy Marlow, 31, English
 Teacher: Alex Jorgin, 37, Math
+Teacher: Marry Blanck, 78, English
+Teacher: Helix Crous, 59, History

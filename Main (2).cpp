@@ -2,8 +2,20 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <memory>
+#include <vector>
+#include "Person.h"
+#include "Student.h"
+#include "Teacher.h"
+#include "ExchangeStudent.h"
 
 using namespace std;
+
+vector<shared_ptr<string>> students;
+vector<shared_ptr<string>> teachers;
+vector<shared_ptr<string>> courses;
+vector<shared_ptr<string>> suggestions;
+
 
 bool authenticateAdmin();
 void saveToFile(const string& data, const string& filename);
@@ -14,7 +26,10 @@ void adminMenu();
 void userMenu();
 void userActions();
 void saveSuggestion(const string& suggestion);
-void displayData(const string& filename);
+void displayData(const vector<shared_ptr<string>>& data);
+void addStudent(const string& name, const string& surname, int age, const string& group);
+void addTeacher(const string& name, const string& surname, int age, const string& subject);
+void addCourse(const string& courseName, int creditHours);
 
 bool authenticateAdmin() {
     string password;
@@ -62,8 +77,6 @@ void registerUser() {
 
     cout << "Enter a password for registration: ";
     cin >> password;
-
-    // Зберігаємо пароль у чистому вигляді
     saveToFile(username + " " + password, "users.txt");
     cout << "Registration successful. You can now log in." << endl;
 }
@@ -86,7 +99,6 @@ bool loginUser() {
     }
     return false;
 }
-
 
 void userMenu() {
     cout << "Please log in or register to continue.\n";
@@ -120,14 +132,13 @@ void adminMenu() {
         cout << "1. Add Student\n";
         cout << "2. Add Teacher\n";
         cout << "3. Add Course\n";
-        cout << "4. Add Exchange Student\n";
-        cout << "5. View Suggestions\n";
-        cout << "6. Exit\n";
+        cout << "4. View Suggestions\n";
+        cout << "5. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
         switch (choice) {
             case 1: {
-                string name, surname, group, data;
+                string name, surname, group;
                 int age;
                 cout << "Enter student's first name: ";
                 cin >> name;
@@ -137,14 +148,11 @@ void adminMenu() {
                 cin >> age;
                 cout << "Enter student's group: ";
                 cin >> group;
-
-                data = "Student: " + name + " " + surname + ", " + to_string(age) + ", " + group;
-                saveToFile(data, "students.txt");
-                cout << "Student added and saved successfully!\n";
+                addStudent(name, surname, age, group);
                 break;
             }
             case 2: {
-                string name, surname, subject, data;
+                string name, surname, subject;
                 int age;
                 cout << "Enter teacher's first name: ";
                 cin >> name;
@@ -154,68 +162,54 @@ void adminMenu() {
                 cin >> age;
                 cout << "Enter teacher's subject: ";
                 cin >> subject;
-
-                data = "Teacher: " + name + " " + surname + ", " + to_string(age) + ", " + subject;
-                saveToFile(data, "teachers.txt");
-                cout << "Teacher added and saved successfully!\n";
+                addTeacher(name, surname, age, subject);
                 break;
             }
             case 3: {
-                string courseName, data;
+                string courseName;
                 int creditHours;
                 cout << "Enter course name: ";
                 cin >> courseName;
                 cout << "Enter credit hours: ";
                 cin >> creditHours;
-
-                data = "Course: " + courseName + ", " + to_string(creditHours);
-                saveToFile(data, "courses.txt");
-                cout << "Course added and saved successfully!\n";
+                addCourse(courseName, creditHours);
                 break;
             }
-            case 4: {
-                string name, surname, course, country, data;
-                int age;
-                cout << "Enter exchange student's first name: ";
-                cin >> name;
-                cout << "Enter exchange student's surname: ";
-                cin >> surname;
-                cout << "Enter exchange student's age: ";
-                cin >> age;
-                cout << "Enter exchange student's course: ";
-                cin >> course;
-                cout << "Enter exchange student's country: ";
-                cin >> country;
-
-                data = "Exchange Student: " + name + " " + surname + ", " + to_string(age) + ", " + course + ", " + country;
-                saveToFile(data, "exchange_students.txt");
-                cout << "Exchange student added and saved successfully!\n";
-                break;
-            }
-            case 5:
+            case 4:
                 cout << "Viewing Suggestions:\n";
-                displayData("suggestions.txt");
+                displayData(suggestions);
                 break;
-            case 6:
+            case 5:
                 cout << "Exiting admin menu.\n";
                 return;
             default:
                 cout << "Invalid choice.\n";
         }
-    } while (choice != 6);
+    } while (choice != 5);
 }
 
-void displayData(const string& filename) {
-    ifstream file(filename);
-    string line;
-    if (file.is_open()) {
-        while (getline(file, line)) {
-            cout << line << endl;
-        }
-        file.close();
-    } else {
-        cout << "Unable to open file\n";
+void displayData(const vector<shared_ptr<string>>& data) {
+    for (const auto& entry : data) {
+        cout << *entry << endl;
     }
+}
+
+void addStudent(const string& name, const string& surname, int age, const string& group) {
+    auto studentInfo = make_shared<string>("Student: " + name + " " + surname + ", " + to_string(age) + ", " + group);
+    students.push_back(studentInfo);
+    saveToFile(*studentInfo, "students.txt");
+}
+
+void addTeacher(const string& name, const string& surname, int age, const string& subject) {
+    auto teacherInfo = make_shared<string>("Teacher: " + name + " " + surname + ", " + to_string(age) + ", " + subject);
+    teachers.push_back(teacherInfo);
+    saveToFile(*teacherInfo, "teachers.txt");
+}
+
+void addCourse(const string& courseName, int creditHours) {
+    auto courseInfo = make_shared<string>("Course: " + courseName + ", " + to_string(creditHours));
+    courses.push_back(courseInfo);
+    saveToFile(*courseInfo, "courses.txt");
 }
 
 void saveSuggestion(const string& suggestion) {
@@ -236,29 +230,24 @@ void userActions() {
         cout << "1. View Students\n";
         cout << "2. View Teachers\n";
         cout << "3. View Courses\n";
-        cout << "4. View Exchange Students\n";
-        cout << "5. Leave a Suggestion\n";
-        cout << "6. Log out\n";
+        cout << "4. Leave a Suggestion\n";
+        cout << "5. Log out\n";
         cout << "Enter your choice: ";
         cin >> choice;
         switch (choice) {
             case 1:
                 cout << "Students:\n";
-                displayData("students.txt");
+                displayData(students);
                 break;
             case 2:
                 cout << "Teachers:\n";
-                displayData("teachers.txt");
+                displayData(teachers);
                 break;
             case 3:
                 cout << "Courses:\n";
-                displayData("courses.txt");
+                displayData(courses);
                 break;
-            case 4:
-                cout << "Exchange Students:\n";
-                displayData("exchange_students.txt");
-                break;
-            case 5: {
+            case 4: {
                 cin.ignore();  
                 string suggestion;
                 cout << "Please type your suggestion and press enter: ";
@@ -266,13 +255,13 @@ void userActions() {
                 saveSuggestion(suggestion);
                 break;
             }
-            case 6:
+            case 5:
                 cout << "Exiting user menu.\n";
                 return;
             default:
-                cout << "Invalid choice. Please enter a number between 1 and 6.\n";
+                cout << "Invalid choice. Please enter a number between 1 and 5.\n";
         }
-    } while (choice != 6);
+    } while (choice != 5);
 }
 
 int main() {
@@ -300,4 +289,4 @@ int main() {
     }
     return 0;
 }
-6
+
