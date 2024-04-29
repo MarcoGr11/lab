@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "sstream"
+#include "functional"
 #include "Person.h"
 #include "Student.h"
 #include "Teacher.h"
@@ -9,14 +11,17 @@
 #include "ExchangeStudent.h"
 
 using namespace std;
-
-
+bool authenticateAdmin();
 void saveToFile(const string& data, const string& filename);
-void displayData(const string& filename);
+bool isUserRegistered(const string& username);
+void registerUser();
+bool loginUser();
 void adminMenu();
 void userMenu();
+void userActions();
 void saveSuggestion(const string& suggestion);
-
+void displayData(const string& filename);
+//-------------------------------------
 bool authenticateAdmin() {
     string password;
     cout << "Please enter admin password: ";
@@ -33,7 +38,88 @@ void saveToFile(const string& data, const string& filename) {
         cout << "Unable to open file\n";
     }
 }
+bool isUserRegistered(const string& username) {
+    string line, registeredUser;
+    ifstream file("users.txt");
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            stringstream ss(line);
+            ss >> registeredUser;
+            if (username == registeredUser) {
+                file.close();
+                return true;
+            }
+        }
+        file.close();
+    }
+    return false;
+}
+//------------------------------------------------
+void registerUser() {
+    string username, password;
+    cout << "Enter a username to register: ";
+    cin >> username;
 
+    if (isUserRegistered(username)) {
+        cout << "This username is already registered. Try logging in." << endl;
+        return;
+    }
+
+    cout << "Enter a password for registration: ";
+    cin >> password;
+
+    // Просте хешування пароля (не використовуйте це в реальних системах)
+    string hashedPassword = to_string(hash<string>{}(password));
+    
+    saveToFile(username + " " + hashedPassword, "users.txt");
+    cout << "Registration successful. You can now log in." << endl;
+}
+
+bool loginUser() {
+    string username, password, fileUsername, fileHashedPassword;
+    cout << "Enter your username: ";
+    cin >> username;
+    cout << "Enter your password: ";
+    cin >> password;
+
+    // Просте хешування пароля (не використовуйте це в реальних системах)
+    string hashedPassword = to_string(hash<string>{}(password));
+
+    ifstream file("users.txt");
+    if (file.is_open()) {
+        while (file >> fileUsername >> fileHashedPassword) {
+            if (fileUsername == username && fileHashedPassword == hashedPassword) {
+                return true;
+            }
+        }
+        file.close();
+    }
+    return false;
+}
+void userMenu() {
+    cout << "Please log in or register to continue.\n";
+    cout << "1. Log in\n";
+    cout << "2. Register\n";
+    cout << "Enter your choice: ";
+    int choice;
+    cin >> choice;
+
+    switch (choice) {
+        case 1:
+            if (loginUser()) {
+                userActions();
+            } else {
+                cout << "Invalid username or password. Please try again or register." << endl;
+            }
+            break;
+        case 2:
+            registerUser();
+            break;
+        default:
+            cout << "Invalid choice." << endl;
+            break;
+    }
+}
 void adminMenu() {
     int choice;
     do {
@@ -150,19 +236,19 @@ void saveSuggestion(const string& suggestion) {
     }
 }
 
-void userMenu() {
+void userActions() {
     int choice;
     do {
-        cout << "User Menu\n";
-        cout << "1. View Students\n";
-        cout << "2. View Teachers\n";
-        cout << "3. View Courses\n";
-        cout << "4. View Exchange Students\n";
-        cout << "5. Leave a Suggestion\n";
-        cout << "6. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-        switch (choice) {
+    cout << "User Actions\n";
+    cout << "1. View Students\n";
+    cout << "2. View Teachers\n";
+    cout << "3. View Courses\n";
+    cout << "4. View Exchange Students\n";
+    cout << "5. Leave a Suggestion\n";
+    cout << "6. Log out\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+    switch (choice) {
             case 1:
                 cout << "Students:\n";
                 displayData("students.txt");
@@ -180,7 +266,7 @@ void userMenu() {
                 displayData("exchange_students.txt");
                 break;
             case 5: {
-                cin.ignore();  // Очищення буферу вводу
+                cin.ignore();  
                 string suggestion;
                 cout << "Please type your suggestion and press enter: ";
                 getline(cin, suggestion);
@@ -192,24 +278,44 @@ void userMenu() {
                 return;
             default:
                 cout << "Invalid choice. Please enter a number between 1 and 6.\n";
-        }
+         }
     } while (choice != 6);
 }
-
-
-
 int main() {
-    int userType;
-    cout << "Select login type (1 for Admin, 2 for User): ";
-    cin >> userType;
-    
-    if (userType == 1 && authenticateAdmin()) {
-        adminMenu();
-    } else if (userType == 2) {
-        userMenu();
-    } else {
-        cout << "Invalid login or not authorized.\n";
-    }
+    cout << "Select login type:\n";
+    cout << "1. Admin Login\n";
+    cout << "2. User Login\n";
+    cout << "Enter choice: ";
+    int choice;
+    cin >> choice;
 
+    switch (choice) {
+        case 1:
+            if (authenticateAdmin()) {
+                adminMenu();
+            } else {
+                cout << "Invalid admin password." << endl;
+            }
+            break;
+        case 2:
+            if (loginUser()) {
+                userActions();
+            } else {
+                cout << "Login failed or user not registered. Do you want to register? (y/n): ";
+                char regChoice;
+                cin >> regChoice;
+                if (regChoice == 'Y' || regChoice == 'Y') {
+                    registerUser();
+                    if (loginUser()) {
+                        userActions();
+                    }
+                }
+            }
+            break;
+        default:
+            cout << "Invalid choice." << endl;
+            break;
+    }
     return 0;
 }
+
