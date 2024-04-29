@@ -1,16 +1,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "sstream"
-#include "functional"
-#include "Person.h"
-#include "Student.h"
-#include "Teacher.h"
-#include "Course.h"
-#include "StudentGroup.h"
-#include "ExchangeStudent.h"
+#include <sstream>
 
 using namespace std;
+
 bool authenticateAdmin();
 void saveToFile(const string& data, const string& filename);
 bool isUserRegistered(const string& username);
@@ -21,7 +15,7 @@ void userMenu();
 void userActions();
 void saveSuggestion(const string& suggestion);
 void displayData(const string& filename);
-//-------------------------------------
+
 bool authenticateAdmin() {
     string password;
     cout << "Please enter admin password: ";
@@ -30,7 +24,7 @@ bool authenticateAdmin() {
 }
 
 void saveToFile(const string& data, const string& filename) {
-    ofstream file(filename, ios::app); // Відкрити файл для дописування
+    ofstream file(filename, ios::app);
     if (file.is_open()) {
         file << data << endl;
         file.close();
@@ -38,6 +32,7 @@ void saveToFile(const string& data, const string& filename) {
         cout << "Unable to open file\n";
     }
 }
+
 bool isUserRegistered(const string& username) {
     string line, registeredUser;
     ifstream file("users.txt");
@@ -54,7 +49,7 @@ bool isUserRegistered(const string& username) {
     }
     return false;
 }
-//------------------------------------------------
+
 void registerUser() {
     string username, password;
     cout << "Enter a username to register: ";
@@ -68,27 +63,22 @@ void registerUser() {
     cout << "Enter a password for registration: ";
     cin >> password;
 
-    // Просте хешування пароля (не використовуйте це в реальних системах)
-    string hashedPassword = to_string(hash<string>{}(password));
-    
-    saveToFile(username + " " + hashedPassword, "users.txt");
+    // Зберігаємо пароль у чистому вигляді
+    saveToFile(username + " " + password, "users.txt");
     cout << "Registration successful. You can now log in." << endl;
 }
 
 bool loginUser() {
-    string username, password, fileUsername, fileHashedPassword;
+    string username, password, fileUsername, filePassword;
     cout << "Enter your username: ";
     cin >> username;
     cout << "Enter your password: ";
     cin >> password;
 
-    // Просте хешування пароля (не використовуйте це в реальних системах)
-    string hashedPassword = to_string(hash<string>{}(password));
-
     ifstream file("users.txt");
     if (file.is_open()) {
-        while (file >> fileUsername >> fileHashedPassword) {
-            if (fileUsername == username && fileHashedPassword == hashedPassword) {
+        while (file >> fileUsername >> filePassword) {
+            if (fileUsername == username && filePassword == password) {
                 return true;
             }
         }
@@ -96,6 +86,8 @@ bool loginUser() {
     }
     return false;
 }
+
+
 void userMenu() {
     cout << "Please log in or register to continue.\n";
     cout << "1. Log in\n";
@@ -120,6 +112,7 @@ void userMenu() {
             break;
     }
 }
+
 void adminMenu() {
     int choice;
     do {
@@ -144,7 +137,7 @@ void adminMenu() {
                 cin >> age;
                 cout << "Enter student's group: ";
                 cin >> group;
-    
+
                 data = "Student: " + name + " " + surname + ", " + to_string(age) + ", " + group;
                 saveToFile(data, "students.txt");
                 cout << "Student added and saved successfully!\n";
@@ -161,13 +154,12 @@ void adminMenu() {
                 cin >> age;
                 cout << "Enter teacher's subject: ";
                 cin >> subject;
-    
+
                 data = "Teacher: " + name + " " + surname + ", " + to_string(age) + ", " + subject;
                 saveToFile(data, "teachers.txt");
                 cout << "Teacher added and saved successfully!\n";
                 break;
             }
-            
             case 3: {
                 string courseName, data;
                 int creditHours;
@@ -175,7 +167,7 @@ void adminMenu() {
                 cin >> courseName;
                 cout << "Enter credit hours: ";
                 cin >> creditHours;
-                
+
                 data = "Course: " + courseName + ", " + to_string(creditHours);
                 saveToFile(data, "courses.txt");
                 cout << "Course added and saved successfully!\n";
@@ -194,17 +186,17 @@ void adminMenu() {
                 cin >> course;
                 cout << "Enter exchange student's country: ";
                 cin >> country;
-                
+
                 data = "Exchange Student: " + name + " " + surname + ", " + to_string(age) + ", " + course + ", " + country;
                 saveToFile(data, "exchange_students.txt");
                 cout << "Exchange student added and saved successfully!\n";
                 break;
             }
-              case 5:
+            case 5:
                 cout << "Viewing Suggestions:\n";
                 displayData("suggestions.txt");
                 break;
-              case 6:
+            case 6:
                 cout << "Exiting admin menu.\n";
                 return;
             default:
@@ -212,6 +204,7 @@ void adminMenu() {
         }
     } while (choice != 6);
 }
+
 void displayData(const string& filename) {
     ifstream file(filename);
     string line;
@@ -239,16 +232,16 @@ void saveSuggestion(const string& suggestion) {
 void userActions() {
     int choice;
     do {
-    cout << "User Actions\n";
-    cout << "1. View Students\n";
-    cout << "2. View Teachers\n";
-    cout << "3. View Courses\n";
-    cout << "4. View Exchange Students\n";
-    cout << "5. Leave a Suggestion\n";
-    cout << "6. Log out\n";
-    cout << "Enter your choice: ";
-    cin >> choice;
-    switch (choice) {
+        cout << "User Actions\n";
+        cout << "1. View Students\n";
+        cout << "2. View Teachers\n";
+        cout << "3. View Courses\n";
+        cout << "4. View Exchange Students\n";
+        cout << "5. Leave a Suggestion\n";
+        cout << "6. Log out\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
             case 1:
                 cout << "Students:\n";
                 displayData("students.txt");
@@ -278,9 +271,10 @@ void userActions() {
                 return;
             default:
                 cout << "Invalid choice. Please enter a number between 1 and 6.\n";
-         }
+        }
     } while (choice != 6);
 }
+
 int main() {
     cout << "Select login type:\n";
     cout << "1. Admin Login\n";
@@ -298,19 +292,7 @@ int main() {
             }
             break;
         case 2:
-            if (loginUser()) {
-                userActions();
-            } else {
-                cout << "Login failed or user not registered. Do you want to register? (y/n): ";
-                char regChoice;
-                cin >> regChoice;
-                if (regChoice == 'Y' || regChoice == 'Y') {
-                    registerUser();
-                    if (loginUser()) {
-                        userActions();
-                    }
-                }
-            }
+            userMenu();
             break;
         default:
             cout << "Invalid choice." << endl;
@@ -318,4 +300,4 @@ int main() {
     }
     return 0;
 }
-
+6
